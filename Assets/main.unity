@@ -172,6 +172,8 @@ MonoBehaviour:
   LimitUpEffectTest: {fileID: 114000010762547330, guid: 7d97eacd64a951c4f9d54a4afe55caac,
     type: 2}
   GoldenFingerSign: {fileID: 1072981892}
+  AutoAddEffectTest2: {fileID: 114000011813918062, guid: 9293504d31bab994cb79c21986686bcc,
+    type: 2}
   Limit: 1
 --- !u!4 &205788518
 Transform:
@@ -258,6 +260,12 @@ Prefab:
       propertyPath: GoldenFingerSign
       value: 
       objectReference: {fileID: 1072981892}
+    - target: {fileID: 114000013953473730, guid: 46ef033047a4b6244b170ddc31e6ed1e,
+        type: 2}
+      propertyPath: AutoAddEffectTest2
+      value: 
+      objectReference: {fileID: 114000011813918062, guid: 9293504d31bab994cb79c21986686bcc,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 46ef033047a4b6244b170ddc31e6ed1e, type: 2}
   m_IsPrefabParent: 0

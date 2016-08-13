@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     Effect LimitUpEffectTest;
     [SerializeField]
     GameObject GoldenFingerSign;
+    [SerializeField]
+    Effect AutoAddEffectTest2;
 
     bool _started;
 
@@ -55,9 +57,25 @@ public class Player : MonoBehaviour
         {
             GiveCardEffect(card, Instantiate(LimitUpEffectTest), 1);
         }
+        else if (place == 7)
+        {
+            GiveCardEffect(card, Instantiate(AutoAddEffectTest), 2);
+        }
         else if (place == 9)
         {
             GiveCardEffect(card, Instantiate(LimitUpEffectTest), 3);
+        }
+        else if (place == 11)
+        {
+            GiveCardEffect(card, Instantiate(AutoAddEffectTest2), 8);
+        }
+        else if (place == 14)
+        {
+            GiveCardEffect(card, Instantiate(LimitUpEffectTest), 4);
+        }
+        else if (place == 19)
+        {
+            GiveCardEffect(card, Instantiate(LimitUpEffectTest), 5);
         }
     }
 
@@ -86,7 +104,7 @@ public class Player : MonoBehaviour
         // todo ポアソン分布
         if (_goldenFingerPlace.HasValue)
         {
-            if (UnityEngine.Random.value < Time.deltaTime * 0.15)
+            if (UnityEngine.Random.value < Time.deltaTime * 0.1)
             {
                 _goldenFingerPlace = null;
                 GoldenFingerSign.SetActive(false);
@@ -97,7 +115,7 @@ public class Player : MonoBehaviour
             if (UnityEngine.Random.value < Time.deltaTime * 0.03)
             {
                 GoldenFingerSign.SetActive(true);
-                _goldenFingerPlace = Mathf.Min(_maxPlace, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 10)); //もうちょっとこりたい
+                _goldenFingerPlace = Mathf.Min(_maxPlace, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 15)); //もうちょっとこりたい
                 GoldenFingerSign.transform.position = GetPositionOfPlace(_goldenFingerPlace.Value);
             }
         }

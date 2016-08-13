@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
         {
             var card = Instantiate(CardTemplate);
             card.Place = i;
-            card.transform.position = new Vector3(5-2 * (i % 5), 2.8f * (i / 5)-7, 0);
+            card.transform.position = new Vector3(2 - 2 * (i % 5), 2.8f * (i / 5) - 4, 0);
             card.Player = this;
         }
     }

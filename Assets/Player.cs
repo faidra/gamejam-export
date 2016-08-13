@@ -7,6 +7,10 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     Card CardTemplate;
+    [SerializeField]
+    Timer Timer;
+
+    bool _started;
 
     public int Limit = 1;
 
@@ -33,11 +37,15 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.logger.Log(ScoreString);
     }
 
     public void AddScore(BigInteger addition)
     {
         Score += addition;
+        if (!_started)
+        {
+            _started = true;
+            Timer.StartsCount();
+        }
     }
 }

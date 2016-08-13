@@ -50,6 +50,6 @@ public class EffectManager : MonoBehaviour
 
     private Vector3 GetPosition(int index)
     {
-        return new Vector3(-2 * (index % 3) + 8.5f, 6+((int)(index / 3)) * -2.7f, 0);
+        return new Vector3(-2 * (index % 5) + 10.5f, 6+((int)(index / 5)) * -2.7f, 0);
     }
 }

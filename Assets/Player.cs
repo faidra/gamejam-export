@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
             if (UnityEngine.Random.value < Time.deltaTime * 0.03)
             {
                 GoldenFingerSign.SetActive(true);
-                _goldenFingerPlace = Mathf.Min(_maxPlace, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 12)); //もうちょっとこりたい
+                _goldenFingerPlace = Mathf.Min(_maxPlace - 8, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 12)); //もうちょっとこりたい
                 GoldenFingerSign.transform.position = GetPositionOfPlace(_goldenFingerPlace.Value);
             }
         }
@@ -123,7 +123,7 @@ public class Player : MonoBehaviour
 
     private Vector3 GetPositionOfPlace(int place)
     {
-        return new Vector3(2 - 2 * (place % 5), 2.8f * (place / 5) - 4, 0);
+        return new Vector3(0 - 2 * (place % 5), 2.8f * (place / 5) - 4.8f, 0);
     }
 
     public void AddScore(BigInteger addition)

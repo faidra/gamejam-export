@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     GameObject FingerSign;
     [SerializeField]
     Effect LimitUpEffectTest;
+    [SerializeField]
+    GameObject GoldenFingerSign;
 
     bool _started;
 
@@ -25,10 +27,13 @@ public class Player : MonoBehaviour
     string ScoreString { get { return Score.ToString(); } }
     public BigInteger Score = new BigInteger();
 
+    int? _goldenFingerPlace;
+    int _maxPlace = 25;
+
     // Use this for initialization
     void Start()
     {
-        for (var i = 0; i < 25; ++i)
+        for (var i = 0; i < _maxPlace; ++i)
         {
             var card = Instantiate(CardTemplate);
             card.Place = i;
@@ -66,13 +71,36 @@ public class Player : MonoBehaviour
 
     internal bool CanAddScoreAt(int place)
     {
-        return place < Limit;
+        return place < Limit || (_goldenFingerPlace.HasValue && place == _goldenFingerPlace);
     }
 
     // Update is called once per frame
     void Update()
     {
         FingerSign.transform.position = GetPositionOfPlace(Limit - 1);
+        if (_started) UpdateGoldenFinger();
+    }
+
+    private void UpdateGoldenFinger()
+    {
+        // todo ポアソン分布
+        if (_goldenFingerPlace.HasValue)
+        {
+            if (UnityEngine.Random.value < Time.deltaTime * 0.15)
+            {
+                _goldenFingerPlace = null;
+                GoldenFingerSign.SetActive(false);
+            }
+        }
+        else
+        {
+            if (UnityEngine.Random.value < Time.deltaTime * 0.03)
+            {
+                GoldenFingerSign.SetActive(true);
+                _goldenFingerPlace = Mathf.Min(_maxPlace, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 10)); //もうちょっとこりたい
+                GoldenFingerSign.transform.position = GetPositionOfPlace(_goldenFingerPlace.Value);
+            }
+        }
     }
 
     private Vector3 GetPositionOfPlace(int place)

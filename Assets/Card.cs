@@ -18,6 +18,7 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public BigInteger ThisScore { get { return new BigInteger(1) << Place; } }
     public bool IsOn { get { return (Player.Score >> Place & 1) > 0; } }
+    public bool CanAddScore { get { return Player.CanAddScoreAt(Place); } }
 
     // Use this for initialization
     void Start () {
@@ -33,6 +34,11 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Player.AddScore(ThisScore);
+        TryAddScore();
+    }
+
+    void TryAddScore()
+    {
+        if (CanAddScore) Player.AddScore(ThisScore);
     }
 }

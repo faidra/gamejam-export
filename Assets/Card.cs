@@ -7,14 +7,14 @@ using ScottGarland;
 public class Card : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
-    Player Player;
+    public Player Player;
     [SerializeField]
     SpriteRenderer Front;
     [SerializeField]
     SpriteRenderer Back;
 
     [SerializeField]
-    int Place;
+    public int Place;
 
     public BigInteger ThisScore { get { return new BigInteger(1) << Place; } }
     public bool IsOn { get { return (Player.Score >> Place & 1) > 0; } }

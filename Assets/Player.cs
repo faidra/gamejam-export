@@ -15,6 +15,8 @@ public class Player : MonoBehaviour
     Effect AutoAddEffectTest;
     [SerializeField]
     GameObject FingerSign;
+    [SerializeField]
+    Effect LimitUpEffectTest;
 
     bool _started;
 
@@ -39,10 +41,18 @@ public class Player : MonoBehaviour
 
     private void GiveCardEffect(Card card, int place)
     {
-        // todo
+        // tekitou
         if (place == 3)
         {
             GiveCardEffect(card, Instantiate(AutoAddEffectTest), 3);
+        }
+        else if (place == 6)
+        {
+            GiveCardEffect(card, Instantiate(LimitUpEffectTest), 1);
+        }
+        else if (place == 9)
+        {
+            GiveCardEffect(card, Instantiate(LimitUpEffectTest), 3);
         }
     }
 
@@ -93,5 +103,10 @@ public class Player : MonoBehaviour
     public void AddEffect(Effect effect)
     {
         EffectManager.AddEffect(effect);
+    }
+
+    public void ExpandLimit(int num)
+    {
+        Limit += num;
     }
 }

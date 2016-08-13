@@ -44,5 +44,7 @@ public class EffectManager : MonoBehaviour
         effect.transform.SetParent(transform);
         effect.transform.localPosition = new Vector3(-2 * Effects.Count, -8, 0);
         effect.Player = Player;
+
+        if (!effect.IsAutoEffect) effect.Affect();
     }
 }

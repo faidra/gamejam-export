@@ -30,9 +30,26 @@ public class Player : MonoBehaviour
             card.Place = i;
             card.transform.position = new Vector3(2 - 2 * (i % 5), 2.8f * (i / 5) - 4, 0);
             card.Player = this;
-        }
 
-        AddEffect(Instantiate(AutoAddEffectTest));
+            GiveCardEffect(card, i);
+        }
+    }
+
+    private void GiveCardEffect(Card card, int place)
+    {
+        // todo
+        if (place == 3)
+        {
+            GiveCardEffect(card, Instantiate(AutoAddEffectTest), 3);
+        }
+    }
+
+    private void GiveCardEffect(Card card, Effect effectInstance, int count)
+    {
+        card.Effect = effectInstance;
+        card.Effect.transform.SetParent(card.transform);
+        card.Effect.transform.localPosition = Vector3.zero;
+        card.RemainingEffectsCount = count;
     }
 
     internal bool CanAddScoreAt(int place)
@@ -53,6 +70,11 @@ public class Player : MonoBehaviour
             _started = true;
             Timer.StartsCount();
         }
+    }
+
+    public void UseScore(BigInteger cost)
+    {
+        Score -= cost;
     }
 
     public void Add2Power(int place)

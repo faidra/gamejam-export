@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     EffectManager EffectManager;
     [SerializeField]
     Effect AutoAddEffectTest;
+    [SerializeField]
+    GameObject FingerSign;
 
     bool _started;
 
@@ -28,7 +30,7 @@ public class Player : MonoBehaviour
         {
             var card = Instantiate(CardTemplate);
             card.Place = i;
-            card.transform.position = new Vector3(2 - 2 * (i % 5), 2.8f * (i / 5) - 4, 0);
+            card.transform.position = GetPositionOfPlace(i);
             card.Player = this;
 
             GiveCardEffect(card, i);
@@ -60,6 +62,12 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        FingerSign.transform.position = GetPositionOfPlace(Limit - 1);
+    }
+
+    private Vector3 GetPositionOfPlace(int place)
+    {
+        return new Vector3(2 - 2 * (place % 5), 2.8f * (place / 5) - 4, 0);
     }
 
     public void AddScore(BigInteger addition)

@@ -104,7 +104,7 @@ public class Player : MonoBehaviour
         // todo ポアソン分布
         if (_goldenFingerPlace.HasValue)
         {
-            if (UnityEngine.Random.value < Time.deltaTime * 0.1)
+            if (UnityEngine.Random.value < Time.deltaTime * 0.15)
             {
                 _goldenFingerPlace = null;
                 GoldenFingerSign.SetActive(false);
@@ -115,7 +115,7 @@ public class Player : MonoBehaviour
             if (UnityEngine.Random.value < Time.deltaTime * 0.03)
             {
                 GoldenFingerSign.SetActive(true);
-                _goldenFingerPlace = Mathf.Min(_maxPlace, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 15)); //もうちょっとこりたい
+                _goldenFingerPlace = Mathf.Min(_maxPlace, Limit + 2 + (int)(Mathf.Pow(UnityEngine.Random.value, 2) * 12)); //もうちょっとこりたい
                 GoldenFingerSign.transform.position = GetPositionOfPlace(_goldenFingerPlace.Value);
             }
         }

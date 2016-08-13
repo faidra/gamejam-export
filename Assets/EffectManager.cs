@@ -40,11 +40,16 @@ public class EffectManager : MonoBehaviour
 
     public void AddEffect(Effect effect)
     {
-        Effects.Add(effect);
         effect.transform.SetParent(transform);
-        effect.transform.localPosition = new Vector3(-2 * Effects.Count + 10, -8, 0);
+        effect.transform.localPosition = GetPosition(Effects.Count);
         effect.Player = Player;
+        Effects.Add(effect);
 
         if (!effect.IsAutoEffect) effect.Affect();
+    }
+
+    private Vector3 GetPosition(int index)
+    {
+        return new Vector3(-2 * (index % 3) + 8.5f, 6+((int)(index / 3)) * -2.7f, 0);
     }
 }

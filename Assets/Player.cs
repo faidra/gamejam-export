@@ -19,4 +19,9 @@ public class Player : MonoBehaviour
     {
         Debug.logger.Log(ScoreString);
     }
+
+    public void AddScore(BigInteger addition)
+    {
+        Score += addition;
+    }
 }

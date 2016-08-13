@@ -2,14 +2,19 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using System;
+using ScottGarland;
 
 public class Card : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField]
     Player Player;
+    [SerializeField]
+    int Place;
 
-	// Use this for initialization
-	void Start () {
+    public BigInteger ThisScore { get { return new BigInteger(1) << Place; } }
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -20,6 +25,6 @@ public class Card : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Player.Score += 1;
+        Player.AddScore(ThisScore);
     }
 }

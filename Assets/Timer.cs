@@ -8,13 +8,13 @@ public class Timer : MonoBehaviour
     Text Text;
 
     float _startedAt;
-    bool _countStarted;
+    public bool Started;
 
-    float Elapsed { get { return _countStarted ? Time.time - _startedAt : 0f; } }
+    public float Elapsed { get { return Started ? Time.time - _startedAt : 0f; } }
 
     public void StartsCount()
     {
-        _countStarted = true;
+        Started = true;
         _startedAt = Time.time;
     }
 

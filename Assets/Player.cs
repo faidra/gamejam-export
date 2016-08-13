@@ -9,6 +9,10 @@ public class Player : MonoBehaviour
     Card CardTemplate;
     [SerializeField]
     Timer Timer;
+    [SerializeField]
+    EffectManager EffectManager;
+    [SerializeField]
+    Effect AutoAddEffectTest;
 
     bool _started;
 
@@ -27,6 +31,8 @@ public class Player : MonoBehaviour
             card.transform.position = new Vector3(2 - 2 * (i % 5), 2.8f * (i / 5) - 4, 0);
             card.Player = this;
         }
+
+        AddEffect(Instantiate(AutoAddEffectTest));
     }
 
     internal bool CanAddScoreAt(int place)
@@ -47,5 +53,15 @@ public class Player : MonoBehaviour
             _started = true;
             Timer.StartsCount();
         }
+    }
+
+    public void Add2Power(int place)
+    {
+        AddScore(new BigInteger(1) << place);
+    }
+
+    public void AddEffect(Effect effect)
+    {
+        EffectManager.AddEffect(effect);
     }
 }

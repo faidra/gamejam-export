@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class Timer : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class Timer : MonoBehaviour
 
     float _startedAt;
     public bool Started;
+    float _stoppedAt = 0f;
 
-    public float Elapsed { get { return Started ? Time.time - _startedAt : 0f; } }
+    public float Elapsed { get { return Started ? Time.time - _startedAt : _stoppedAt; } }
 
     public void StartsCount()
     {
@@ -36,5 +38,11 @@ public class Timer : MonoBehaviour
             Text.text = string.Format("{0}:{1:00}:{2:00}", min, sec, centSec);
         else
             Text.text = string.Format("{0}:{1:00}", sec, centSec);
+    }
+
+    internal void Stop()
+    {
+        _stoppedAt = Elapsed;
+        Started = false;
     }
 }

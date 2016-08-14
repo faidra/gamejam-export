@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     GameObject GoldenFingerSign;
     [SerializeField]
     Effect AutoAddEffectTest2;
+    [SerializeField]
+    GameClearEffect GameClearEffect;
 
     bool _started;
 
@@ -31,6 +33,8 @@ public class Player : MonoBehaviour
 
     int? _goldenFingerPlace;
     int _maxPlace = 25;
+
+    bool _gameCleared;
 
     // Use this for initialization
     void Start()
@@ -77,6 +81,10 @@ public class Player : MonoBehaviour
         {
             GiveCardEffect(card, Instantiate(LimitUpEffectTest), 5);
         }
+        else if (place == _maxPlace - 1)
+        {
+            GiveCardEffect(card, Instantiate(GameClearEffect), 1);
+        }
     }
 
     private void GiveCardEffect(Card card, Effect effectInstance, int count)
@@ -96,7 +104,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         FingerSign.transform.position = GetPositionOfPlace(Limit - 1);
-        if (_started) UpdateGoldenFinger();
+        if (_started && !_gameCleared) UpdateGoldenFinger();
     }
 
     private void UpdateGoldenFinger()
@@ -154,5 +162,32 @@ public class Player : MonoBehaviour
     public void ExpandLimit(int num)
     {
         Limit += num;
+    }
+
+    public void GameClear()
+    {
+        _gameCleared = true;
+        FingerSign.SetActive(false);
+        GoldenFingerSign.SetActive(false);
+        Limit = 100;
+        Timer.Stop();
+        var finger1 = Instantiate(GoldenFingerSign);
+        finger1.transform.position = GetPositionOfPlace(0);
+        finger1.SetActive(true);
+
+        var finger2 = Instantiate(GoldenFingerSign);
+        finger2.transform.position = GetPositionOfPlace(4);
+        finger2.SetActive(true);
+        finger2.transform.localScale = new Vector3(-1, 1, 1);
+
+        var finger3 = Instantiate(GoldenFingerSign);
+        finger3.transform.position = GetPositionOfPlace(20);
+        finger3.SetActive(true);
+        finger3.transform.localScale = new Vector3(1, -1, 1);
+
+        var finger4 = Instantiate(GoldenFingerSign);
+        finger4.transform.position = GetPositionOfPlace(24);
+        finger4.SetActive(true);
+        finger4.transform.localScale = new Vector3(-1, -1, 1);
     }
 }
